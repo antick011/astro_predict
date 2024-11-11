@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Palmistry Prediction</title>
+</head>
+<body>
+    <h1>Palmistry Prediction</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <br>
+        <button type="submit">Get Prediction</button>
+    </form>
+
+    {% if prediction %}
+        <h2>Your Palmistry Prediction:</h2>
+        <ul>
+            <li><strong>Nature Prediction:</strong> {{ prediction.heart_line }}</li>
+            <li><strong>Health Prediction:</strong> {{ prediction.life_line }}</li>
+            <li><strong>Career Suggestion:</strong> {{ prediction.mind_line }}</li>
+            <li><strong>Work Style Suggestion:</strong> {{ prediction.fate_line }}</li>
+        </ul>
+    {% endif %}
+</body>
+</html>
