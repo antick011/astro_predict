@@ -1,18 +1,26 @@
-
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>Palmistry Prediction</title>
+    <style>
+        .option-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+        .option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .option img {
+            margin-left: 10px;
+        }
+    </style>
 </head>
 <body>
     <h1>Palmistry Prediction</h1>
-
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <br>
-        <button type="submit">Get Prediction</button>
-    </form>
 
     {% if prediction %}
         <h2>Your Palmistry Prediction:</h2>
@@ -23,5 +31,88 @@
             <li><strong>Work Style Suggestion:</strong> {{ prediction.fate_line }}</li>
         </ul>
     {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+
+        <h3>Heart Line</h3>
+        <div class="option-group">
+            <label class="option">
+                {{ form.heart_line.0 }} <!-- Choice for "Ends at Index Finger" -->
+                
+                <img src="{% static 'images/heart_index.jpg' %}" alt="Heart Line Ends at Index Finger" width="100">
+            </label>
+            <label class="option">
+                {{ form.heart_line.1 }} <!-- Choice for "Ends at Middle Finger" -->
+                
+                <img src="{% static 'images/heart_middle.jpg' %}" alt="Heart Line Ends at Middle Finger" width="100">
+            </label>
+            <label class="option">
+                {{ form.heart_line.2 }} <!-- Choice for "Facing Both Fingers" -->
+                
+                <img src="{% static 'images/heart_both.jpg' %}" alt="Heart Line Facing Both Fingers" width="100">
+            </label>
+        </div>
+
+        <h3>Mind Line</h3>
+        <div class="option-group">
+            <label class="option">
+                {{ form.mind_line.0 }} <!-- Choice for "Curved" -->
+                
+                <img src="{% static 'images/mind_straight.jpg' %}" alt="Curved Mind Line" width="100">
+            </label>
+            <label class="option">
+                {{ form.mind_line.1 }} <!-- Choice for "Straight" -->
+                
+                <img src="{% static 'images/mind_curve.jpg' %}" alt="Straight Mind Line" width="100">
+            </label>
+            <label class="option">
+                {{ form.mind_line.2 }} <!-- Choice for "Short" -->
+                <img src="{% static 'images/mind_short.jpg' %}" alt="Short Mind Line" width="100">
+            </label>
+        </div>
+
+        <h3>Life Line</h3>
+        <div class="option-group">
+            <label class="option">
+                {{ form.life_line.0 }} <!-- Choice for "Long" -->
+                
+                <img src="{% static 'images/life_long.jpg' %}" alt="Long Life Line" width="100">
+            </label>
+            <label class="option">
+                {{ form.life_line.1 }} <!-- Choice for "Short" -->
+                
+                <img src="{% static 'images/life_short.jpg' %}" alt="Short Life Line" width="100">
+            </label>
+            <label class="option">
+                {{ form.life_line.2 }} <!-- Choice for "Broken" -->
+                
+                <img src="{% static 'images/life_broken.jpg' %}" alt="Broken Life Line" width="100">
+            </label>
+        </div>
+
+        <h3>Fate Line</h3>
+        <div class="option-group">
+            <label class="option">
+                {{ form.fate_line.0 }} <!-- Choice for "Present" -->
+                
+                <img src="{% static 'images/fate_present.jpg' %}" alt="Present Fate Line" width="100">
+            </label>
+            <label class="option">
+                {{ form.fate_line.1 }} <!-- Choice for "Absent" -->
+                
+                <img src="{% static 'images/fate_absent.jpg' %}" alt="Absent Fate Line" width="100">
+            </label>
+            <label class="option">
+                {{ form.fate_line.2 }} <!-- Choice for "Broken" -->
+            Broken
+                <img src="{% static 'images/fate_broken.jpg' %}" alt="Broken Fate Line" width="100">
+            </label>
+        </div>
+
+        <br>
+        <button type="submit">Get Prediction</button>
+    </form>
+
 </body>
 </html>
